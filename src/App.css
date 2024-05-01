@@ -1,16 +1,17 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.TopNav {
+  display: flex;
+  flex-direction: row;
 }
 
 .App-header {
@@ -35,4 +36,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.containerLeft, .containerRight, .content {
+  display: flex;
+  width: 100%; }
+
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column; /* zmiana flex-direction na row */
+}
+
+.leftMenu {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.rightMenu {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.extraContent {
+  flex-grow: 1;
 }
