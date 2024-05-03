@@ -1,30 +1,23 @@
 import React from 'react';
 import './App.css';
-import VerticalMenu from './components/VerticalMenu';
-import BasicMenu from './components/BasicMenu';
-
-
-
+import { BrowserRouter, Link } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <div className='TopNav'>
-      < div className="leftMenu">
-        <VerticalMenu />
-      </div>
-      <div className="content">
-        <h1>Content</h1>
-      </div>
-      <div className="rightMenu">
-        <BasicMenu />
-      </div>
+    <BrowserRouter>
+    <div>
+    <nav>
+      <ul>
+        <li><Link to ="/">Home</Link></li>
+        <li><Link to ="/board">Board</Link></li>
+        <li><Link to ="/lists">Tasks</Link></li>
+      </ul>
+      </nav>  
     </div>
-    <div className='extraContent'>
-      <h1>Top Content</h1>
-      </div>
-    </div>
- 
+    </BrowserRouter>
+    
+      
+   
   );
 }
 
