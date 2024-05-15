@@ -9,6 +9,7 @@ const Register = () => {
     const [registerStatus, setRegisterStatus] = useState("");
     const handleSubmit = async (event) => {
       event.preventDefault();
+      try {
       const response = await fetch("http://localhost:8080/api/v1/register", {
           method: "POST",
           headers: {
@@ -17,12 +18,19 @@ const Register = () => {
           body: JSON.stringify({ email, username, password }),
       });
   
-      if (response.ok) {
+      if (!response.ok) {
+          const data = await response.json();
+          if(data.error === "User already exists"){
+             throw new Error("User already exists");
+          } else {
+              throw new Error("Failed to Register in");
+          } }
+
           const data = await response.json();
           console.log(data);
           setRegisterStatus("Register in successfully");
-      } else {
-          setRegisterStatus("Failed to Register in");
+      } catch (error) {
+          setRegisterStatus(error.message);
       }
   };
     return (
