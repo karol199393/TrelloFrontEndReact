@@ -12,18 +12,24 @@ function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch("http://localhost:8080/api/v1/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-        });
-        const data = await response.json();
-        console.log(data);
-        if (response.ok) {
+        try {
+            const response = await fetch("http://localhost:8080/api/v1/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+    
+            const data = await response.json();
+            console.log(data);
             setLoginStatus("Logged in successfully");
-        } else {
+        } catch (error) {
+            console.error('Error:', error);
             setLoginStatus("Failed to log in");
         }
     };

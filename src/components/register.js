@@ -6,19 +6,25 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [registerStatus, setRegisterStatus] = useState("");
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const response = await fetch("http://localhost:8080/api/v1/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, username, password }),
-        });
-        const data = await response.json();
-        console.log(data);
-    };
+      event.preventDefault();
+      const response = await fetch("http://localhost:8080/api/v1/register", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, username, password }),
+      });
+  
+      if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setRegisterStatus("Register in successfully");
+      } else {
+          setRegisterStatus("Failed to Register in");
+      }
+  };
     return (
       <form onSubmit={handleSubmit} className="register-form">
       <label>
@@ -46,6 +52,8 @@ const Register = () => {
         />
       </label>
       <button type="submit">Register</button>
+      <p>{registerStatus}</p>
+
 </form>
     );
 };
